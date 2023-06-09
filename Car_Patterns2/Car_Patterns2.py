@@ -14,22 +14,18 @@ class SUV(Car):
     def drive(self):
         return "Водим Сув"
 
-def get_car(car="Седан"):
-    cars = dict(sedan=Sedan(), suv=SUV())
-    return cars[car]
-
 # Фасад
 class CarFacade:
-    def __init__(self, car_type):
-        self._car = get_car(car_type)
+    def __init__(self, car):
+        self._car = car
 
     def drive(self):
         self._car.drive()
 
 # Стратегия
 class CarDriver:
-    def __init__(self, car_type, drive_strategy):
-        self._car = CarFacade(car_type)
+    def __init__(self, car, drive_strategy):
+        self._car = car
         self._strategy = drive_strategy
 
     def execute(self):
@@ -48,6 +44,17 @@ class SportDriveStrategy(DriveStrategy):
     def drive(self, car):
         print("Режим спорткара: " + car.drive())
 
-s0 = CarDriver("Сув", SportDriveStrategy())
-s1 = CarDriver("Седан", NormalDriveStrategy())
+sedan = Sedan()
+suv = SUV()
 
+car1 = CarFacade(sedan)
+car2 = CarFacade(suv)
+
+strategy1 = NormalDriveStrategy()
+strategy2 = SportDriveStrategy()
+
+car_driver1 = CarDriver(car1, strategy1)
+car_driver2 = CarDriver(car2, strategy2)
+
+car_driver1.execute()
+car_driver2.execute()
