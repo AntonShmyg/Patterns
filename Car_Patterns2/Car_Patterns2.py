@@ -8,13 +8,13 @@ class Car(ABC):
 
 class Sedan(Car):
     def drive(self):
-        return "Driving sedan"
+        return "Водим седан"
 
 class SUV(Car):
     def drive(self):
-        return "Driving SUV"
+        return "Водим Сув"
 
-def get_car(car="sedan"):
+def get_car(car="Седан"):
     cars = dict(sedan=Sedan(), suv=SUV())
     return cars[car]
 
@@ -42,15 +42,12 @@ class DriveStrategy:
 
 class NormalDriveStrategy(DriveStrategy):
     def drive(self, car):
-        print("Driving normally: " + car.drive())
+        print("Обычный режим: " + car.drive())
 
 class SportDriveStrategy(DriveStrategy):
     def drive(self, car):
-        print("Driving sportily: " + car.drive())
+        print("Режим спорткара: " + car.drive())
 
-s0 = CarDriver("suv", SportDriveStrategy())
-s1 = CarDriver("sedan", NormalDriveStrategy())
-
-s0.execute()
-s1.execute()
+s0 = CarDriver("Сув", SportDriveStrategy())
+s1 = CarDriver("Седан", NormalDriveStrategy())
 
